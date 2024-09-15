@@ -8,7 +8,6 @@ import RegistroAfiliados from './pages/RegistroAfiliados';
 import RegistroBeneficiarios from './pages/RegistroBeneficiarios';
 import Home from './pages/Home';
 
-
 function App() {
   return (
     <>
