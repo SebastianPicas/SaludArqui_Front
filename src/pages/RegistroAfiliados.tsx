@@ -48,7 +48,7 @@ const RegistroAfiliado: React.FC = () => {
             </button>
           </form>
         </div>
-        <div className="col-md-4">
+        <div className="col-md-4 d-flex align-items-center justify-content-center">
           <div className="mt-4">
             <img src={contact} alt="Contact" className="img-fluid" />
           </div>
