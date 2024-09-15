@@ -1,30 +1,22 @@
-# React + TypeScript + Vite
+# Plataforma de Salud - Gestión de Afiliados y Beneficiarios
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Proyecto Diseño y arquitectura de software
 
-Currently, two official plugins are available:
+Integrantes:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Cristian Steven Soto Zapata,
+- Sebastian Piñeros Castellanos
+- Sergio Eduardo Socha Mendoza
 
-## Expanding the ESLint configuration
+## Descripción
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Esta aplicación de salud tiene como objetivo permitir la creación y consulta de afiliados y beneficiarios dentro del sistema. Además, permite revisar las citas médicas de cada uno, proporcionando una plataforma eficiente para la gestión de la información relacionada con los pacientes.
 
-- Configure the top-level `parserOptions` property like this:
+La plataforma incluye las siguientes características principales:
+- Registro y consulta de afiliados.
+- Registro y consulta de beneficiarios asociados a afiliados.
+- Visualización de citas médicas de los afiliados y sus beneficiarios.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Objetivo
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+El objetivo principal de esta aplicación es optimizar la gestión de datos de los usuarios de servicios de salud, proporcionando una herramienta para mantener actualizada la información de afiliados y beneficiarios, y facilitando la consulta de citas médicas en un entorno digital.
