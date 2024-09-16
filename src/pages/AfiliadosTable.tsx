@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css'; 
 
-// Definir la interfaz del tipo de afiliado
 interface Afiliado {
   id_afiliado: number;
   nombre: string;
   edad: number;
   email: string;
   genero: string;
-  citasMedicas: any[]; // Puedes refinar esto si tienes información sobre cómo es este array
 }
 
 const AfiliadosTable = () => {
   const [afiliados, setAfiliados] = useState<Afiliado[]>([]);
 
-  // Función para obtener los datos de la API
   useEffect(() => {
     fetch('/api/afiliado/todos')
       .then((response) => {
@@ -23,7 +21,7 @@ const AfiliadosTable = () => {
         return response.json();
       })
       .then((data: Afiliado[]) => {
-        console.log('Datos recibidos:', data); // Mostrar los datos en la consola
+        console.log('Datos recibidos:', data);
         setAfiliados(data);
       })
       .catch((error) => {
@@ -32,10 +30,10 @@ const AfiliadosTable = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Lista de Afiliados</h1>
-      <table border={1}>
-        <thead>
+    <div className="container mt-5">
+      <h1 className="text-center mb-4">Lista de Afiliados</h1>
+      <table className="table table-striped table-bordered">
+        <thead className="table-dark">
           <tr>
             <th>ID</th>
             <th>Nombre</th>
@@ -47,7 +45,7 @@ const AfiliadosTable = () => {
         <tbody>
           {afiliados.length === 0 ? (
             <tr>
-              <td colSpan={5}>Cargando datos...</td>
+              <td colSpan={5} className="text-center">Cargando datos...</td>
             </tr>
           ) : (
             afiliados.map((afiliado) => (
