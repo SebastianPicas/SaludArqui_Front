@@ -7,8 +7,8 @@ import Navbar from './components/Navbar';
 import RegistroAfiliados from './pages/RegistroAfiliados';
 import RegistroBeneficiarios from './pages/RegistroBeneficiarios';
 import Home from './pages/Home';
-import Citas from './pages/citas';
-
+import Citas from './pages/Citas';
+import AfiliadosTablas from './pages/AfiliadosTable';
 
 function App() {
   return (
@@ -20,6 +20,7 @@ function App() {
           <Route path="/afiliados" element={<RegistroAfiliados />} />
           <Route path="/beneficiarios" element={<RegistroBeneficiarios />} />
           <Route path="/citas" element={<Citas />}/>
+          <Route path="/listafiliados" element={<AfiliadosTablas />}/>
         </Routes>
       </Router>
     </>
