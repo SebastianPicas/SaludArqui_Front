@@ -11,7 +11,6 @@ const RegistroAfiliado: React.FC = () => {
   const [genero, setGender] = useState<string>('');
   const [showId, setShowId] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
-  const [afiliados, setAfiliados] = useState<Afiliado[]>([]);
 
   interface Afiliado {
     id_afiliado: number;
@@ -27,9 +26,9 @@ const RegistroAfiliado: React.FC = () => {
     "Access-Control-Allow-Headers": "Content-Type",
   };
 
-  // Hook para obtener afiliado por ID
-  useEffect(() => {
-    if (id) {  // Solo busca si se proporciona un ID
+  // Evento para manejar la búsqueda del afiliado por ID y llenar los campos
+  const handleGetClick = () => {
+    if (id) {
       fetch(`/api/afiliado/${id}`)
         .then((response) => {
           if (!response.ok) {
@@ -37,26 +36,28 @@ const RegistroAfiliado: React.FC = () => {
           }
           return response.json();
         })
-        .then((data: Afiliado[]) => {
-          console.log('Datos recibidos:', data);
-          setAfiliados(data);
+        .then((data: Afiliado) => {
+          console.log('Afiliado encontrado:', data);
+          // Llenar los campos con los datos del afiliado
+          setFullName(data.nombre);
+          setAge(data.edad);
+          setEmail(data.email);
+          setGender(data.genero);
+          setMessage('Afiliado encontrado y cargado correctamente');
         })
         .catch((error) => {
           console.error('Error al cargar los datos:', error);
+          setMessage('Error al buscar el afiliado.');
         });
-    }
-  }, [id]);
-
-  // Evento para manejar la búsqueda del afiliado por ID
-  const handleGetClick = () => {
-    if (id) {
-      console.log(`Buscando afiliado con ID: ${id}`);
+    } else {
+      setMessage('Por favor ingresa un ID válido.');
     }
   };
 
   // Evento para alternar entre registrar y actualizar
   const handleUpdateClick = () => {
     setShowId(prevShowId => !prevShowId);
+    setMessage(null); // Limpiar cualquier mensaje previo
   };
 
   // Manejo del registro de afiliado (POST)
@@ -117,7 +118,7 @@ const RegistroAfiliado: React.FC = () => {
               <div className="mb-3">
                 <label htmlFor="id" className="form-label">ID</label>
                 <input 
-                  type="text" 
+                  type="number" 
                   id="id" 
                   className="form-control" 
                   placeholder="ID" 
