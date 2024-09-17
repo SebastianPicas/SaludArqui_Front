@@ -13,7 +13,7 @@ const AfiliadosTable = () => {
   const [afiliados, setAfiliados] = useState<Afiliado[]>([]);
 
   useEffect(() => {
-    fetch('/api/afiliado/todos')
+    fetch('https://saludarqui.uc.r.appspot.com/afiliado/todos')
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
