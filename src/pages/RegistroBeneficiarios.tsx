@@ -25,7 +25,7 @@ const RegistroBeneficiarios: React.FC = () => {
 
   const handleGetClick = () => {
     if (id) {
-      fetch(`/api/beneficiario/${id}`)
+      fetch(`https://saludarqui.uc.r.appspot.com/beneficiario/${id}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error(`Error en la respuesta HTTP: ${response.status}`);
@@ -58,7 +58,7 @@ const RegistroBeneficiarios: React.FC = () => {
 
     console.log({ nombre, email, idAfiliado });
 
-    fetch('/api/beneficiario', {
+    fetch('https://saludarqui.uc.r.appspot.com/beneficiario', {
       method: 'POST',
       headers: {
         ...CORSHEADER,
@@ -78,7 +78,7 @@ const RegistroBeneficiarios: React.FC = () => {
   const handleUpdate = (event: React.FormEvent) => {
     event.preventDefault();
   
-    fetch(`/api/beneficiario/${id}`, {
+    fetch(`https://saludarqui.uc.r.appspot.com/beneficiario/${id}`, {
       method: 'PUT',
       headers: {
         ...CORSHEADER,

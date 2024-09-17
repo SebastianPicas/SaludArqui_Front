@@ -28,7 +28,7 @@ const RegistroAfiliado: React.FC = () => {
 
   const handleGetClick = () => {
     if (id) {
-      fetch(`/api/afiliado/${id}`)
+      fetch(`https://saludarqui.uc.r.appspot.com/afiliado/${id}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error(`Error en la respuesta HTTP: ${response.status}`);
@@ -60,7 +60,7 @@ const RegistroAfiliado: React.FC = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
   
-    fetch('/api/afiliado', {
+    fetch('https://saludarqui.uc.r.appspot.com/afiliado', {
       method: 'POST',
       headers: {
         ...CORSHEADER,
@@ -84,7 +84,7 @@ const RegistroAfiliado: React.FC = () => {
   const handleUpdate = (event: React.FormEvent) => {
     event.preventDefault();
   
-    fetch(`/api/afiliado/${id}`, {
+    fetch(`https://saludarqui.uc.r.appspot.com/afiliado/${id}`, {
       method: 'PUT',
       headers: {
         ...CORSHEADER,
