@@ -7,17 +7,17 @@ const Citas: React.FC = () => {
         <div className="container-fluid mt-4">
             <h2>Historial de Citas</h2>
             <div className="row mb-3">
-                <div className="col-md-6"> {/* Ajusta el ancho del campo de texto */}
+                <div className="col-md-6">
                     <label htmlFor="id" className="form-label">ID</label>
                     <input 
                         type="text" 
                         id="id" 
                         className="form-control" 
                         placeholder="ID" 
-                        style={{ maxWidth: '300px' }} // Ajusta el ancho del campo de texto
+                        style={{ maxWidth: '300px' }}
                     />
                 </div>
-                <div className="col-md-6 d-flex align-items-end"> {/* Alinea el botón a la izquierda */}
+                <div className="col-md-6 d-flex align-items-end">
                     <button type="submit" className="btn btn-primary btn-sm">
                         Search
                     </button>

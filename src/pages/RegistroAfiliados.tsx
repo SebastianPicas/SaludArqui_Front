@@ -4,14 +4,13 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import contact from '../assets/images/contact-img.jpg';
 
 const RegistroAfiliado: React.FC = () => {
-  // Estados para los campos del formulario
   const [id] = useState<string>('');
   const [nombre, setFullName] = useState<string>('');
   const [edad, setAge] = useState<number | ''>('');
   const [email, setEmail] = useState<string>('');
   const [genero, setGender] = useState<string>('');
   const [showId, setShowId] = useState(false);
-  const [message, setMessage] = useState<string | null>(null); // Estado para el mensaje
+  const [message, setMessage] = useState<string | null>(null);
 
   const CORSHEADER = {
     "Access-Control-Allow-Origin": "*",
@@ -26,18 +25,17 @@ const RegistroAfiliado: React.FC = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
   
-    console.log({ nombre, edad, email, genero }); // Para verificar los valores
+    console.log({ nombre, edad, email, genero });
   
     fetch('/api/afiliado', {
       method: 'POST',
       headers: {
-        ...CORSHEADER,  // Incluye los encabezados de CORS
-        'Content-Type': 'application/json',  // Agrega el encabezado Content-Type para JSON
+        ...CORSHEADER,
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ nombre, edad, email, genero }),  // Asegúrate de enviar los datos como JSON
+      body: JSON.stringify({ nombre, edad, email, genero }), 
     })
     .then(data => {
-      // Mostrar mensaje de éxito si la solicitud es exitosa
       setMessage('Afiliado registrado con éxito!');
       setFullName('');
       setAge('');
@@ -45,7 +43,6 @@ const RegistroAfiliado: React.FC = () => {
       setGender('');
     })
     .catch(error => {
-      // Mostrar mensaje de error si algo sale mal
       setMessage(`Error al registrar el afiliado: ${error.message}`);
     });
   };
