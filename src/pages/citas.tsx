@@ -26,8 +26,8 @@ const Citas: React.FC = () => {
             <div className="row">
                 <div className="col-12">
                     <div className="table-responsive">
-                        <table className="table table-striped">
-                            <thead>
+                        <table className="table table-striped table-bordered">
+                            <thead className="table-dark">
                                 <tr>
                                     <th>Code</th>
                                     <th>Description</th>
