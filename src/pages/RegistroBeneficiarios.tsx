@@ -66,12 +66,6 @@ const RegistroBeneficiarios: React.FC = () => {
       },
       body: JSON.stringify({ nombre, email, idAfiliado }),
     })
-    .then((data) => {
-      setMessage('Beneficiario registrado con éxito!');
-      setFullName('');
-      setEmail('');
-      setIdA('');
-    })
     .catch(error => {
       setMessage(`Error al registrar el beneficiario: ${error.message}`);
     });
