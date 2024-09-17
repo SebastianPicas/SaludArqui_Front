@@ -120,8 +120,7 @@ const RegistroAfiliado: React.FC = () => {
             </div>
             <button 
               type="submit" 
-              className="btn btn-primary"
-            >
+              className="btn btn-primary">
               {showId ? 'Actualizar' : 'Registrar'}
             </button>
             {message && <div className="mt-3 alert alert-info">{message}</div>}
