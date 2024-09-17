@@ -4,7 +4,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import contact from '../assets/images/about-img.jpg';
 
 const RegistroBeneficiarios: React.FC = () => {
-  const [id] = useState<string>('');
+  const [id, setId] = useState<number | ''>('');
   const [nombre, setFullName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [idAfiliado, setIdA] = useState<number | ''>('');
@@ -17,7 +17,38 @@ const RegistroBeneficiarios: React.FC = () => {
     "Access-Control-Allow-Headers": "Content-Type",
   };
 
-  const handleRegistro = (event: React.FormEvent) => {
+  interface Beneficiario {
+    id_beneficiario: number;
+    nombre: string;
+    email: string;
+  }
+
+  const handleGetClick = () => {
+    if (id) {
+      fetch(`/api/beneficiario/${id}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Error en la respuesta HTTP: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data: Beneficiario) => {
+          console.log('Beneficiario encontrado:', data);
+          setFullName(data.nombre);
+          setEmail(data.email);
+          setMessage('Beneficiario encontrado y cargado correctamente');
+        })
+        .catch((error) => {
+          console.error('Error al cargar los datos:', error);
+          setMessage('Error al buscar el beneficiario.');
+        });
+    } else {
+      setMessage('Por favor ingresa un ID válido.');
+    }
+  };
+
+
+  const handleUpload = (event: React.FormEvent) => {
     event.preventDefault();
   
     if (!nombre || !email || !idAfiliado) {
@@ -50,12 +81,33 @@ const RegistroBeneficiarios: React.FC = () => {
     setShowId(prevShowId => !prevShowId);
   };
 
+  const handleUpdate = (event: React.FormEvent) => {
+    event.preventDefault();
+  
+    fetch(`/api/beneficiario/${id}`, {
+      method: 'PUT',
+      headers: {
+        ...CORSHEADER,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ nombre, email}), 
+    })
+    .then(() => {
+      setMessage('Beneficiario actualizado con éxito!');
+      setFullName('');
+      setEmail('');
+    })
+    .catch(error => {
+      setMessage(`Error al actualizar el Beneficiario: ${error.message}`);
+    });
+  };
+
   return (
     <div className="container mt-4">
       <div className="row">
         <div className="col-md-8">
           <h2>{showId ? 'Actualizar Beneficiario' : 'Registrar Beneficiario'}</h2>
-          <form onSubmit={handleRegistro}>
+          <form onSubmit={showId ? handleUpdate : handleUpload}>
             {showId && (
               <div className="mb-3">
                 <label htmlFor="id" className="form-label">ID</label>
@@ -65,7 +117,7 @@ const RegistroBeneficiarios: React.FC = () => {
                   className="form-control" 
                   placeholder="ID"
                   value={id} 
-                  readOnly
+                  onChange={(e) => setId(Number(e.target.value))}
                 />
               </div>
             )}
@@ -91,17 +143,30 @@ const RegistroBeneficiarios: React.FC = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <div className="mb-3">
-              <label htmlFor="beneficiaryRequestAfiliadoID" className="form-label">ID Afiliado</label>
-              <input 
-                type="number" 
-                id="beneficiaryRequestAfiliadoID" 
-                className="form-control" 
-                placeholder="ID Afiliado"
-                value={idAfiliado || ''} 
-                onChange={(e) => setIdA(Number(e.target.value))}
-              />
-            </div>
+            {!showId && (
+              <div className="mb-3">
+                <label htmlFor="beneficiaryRequestAfiliadoID" className="form-label">ID Afiliado</label>
+                <input 
+                  type="number" 
+                  id="beneficiaryRequestAfiliadoID" 
+                  className="form-control" 
+                  placeholder="ID Afiliado"
+                  value={idAfiliado || ''} 
+                  onChange={(e) => setIdA(Number(e.target.value))}
+                />
+              </div>
+            )}
+            {showId && (
+              <div className="mb-3">
+                <button 
+                  type="button" 
+                  className="btn btn-primary" 
+                  onClick={handleGetClick}
+                >
+                  Buscar beneficiario por ID
+                </button>
+              </div>
+            )}
             <div className="mb-3">
               <button type="button" className="btn btn-primary" onClick={handleUpdateClick}>
                 {showId ? 'Registrar' : 'Actualizar'} Beneficiario

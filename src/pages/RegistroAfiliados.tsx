@@ -26,7 +26,6 @@ const RegistroAfiliado: React.FC = () => {
     "Access-Control-Allow-Headers": "Content-Type",
   };
 
-  // Evento para manejar la búsqueda del afiliado por ID y llenar los campos
   const handleGetClick = () => {
     if (id) {
       fetch(`/api/afiliado/${id}`)
@@ -38,7 +37,6 @@ const RegistroAfiliado: React.FC = () => {
         })
         .then((data: Afiliado) => {
           console.log('Afiliado encontrado:', data);
-          // Llenar los campos con los datos del afiliado
           setFullName(data.nombre);
           setAge(data.edad);
           setEmail(data.email);
@@ -54,13 +52,11 @@ const RegistroAfiliado: React.FC = () => {
     }
   };
 
-  // Evento para alternar entre registrar y actualizar
   const handleUpdateClick = () => {
     setShowId(prevShowId => !prevShowId);
-    setMessage(null); // Limpiar cualquier mensaje previo
+    setMessage(null);
   };
 
-  // Manejo del registro de afiliado (POST)
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
   
@@ -84,11 +80,11 @@ const RegistroAfiliado: React.FC = () => {
     });
   };
 
-  // Manejo de actualización de afiliado (PUT)
+
   const handleUpdate = (event: React.FormEvent) => {
     event.preventDefault();
   
-    fetch(`/api/afiliado/${id}`, {  // Usa el ID para la actualización
+    fetch(`/api/afiliado/${id}`, {
       method: 'PUT',
       headers: {
         ...CORSHEADER,
