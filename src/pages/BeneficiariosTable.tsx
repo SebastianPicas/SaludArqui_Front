@@ -4,16 +4,14 @@ interface Beneficiario {
   id_beneficiario: number;
   nombre: string;
   email: string;
-  afiliadoORM: Afiliado;
-}
-
-interface Afiliado {
+  afliliadoORM: {
     id_afiliado: number;
     nombre: string;
     edad: number;
     email: string;
     genero: string;
-  }
+  };
+}
 
 const BeneficiariosTable: React.FC = () => {
   const [beneficiarios, setBeneficiarios] = useState<Beneficiario[]>([]);
@@ -67,9 +65,9 @@ const BeneficiariosTable: React.FC = () => {
                   <td>{beneficiario.id_beneficiario}</td>
                   <td>{beneficiario.nombre}</td>
                   <td>{beneficiario.email}</td>
-                  <td>{beneficiario.afiliadoORM?.id_afiliado ?? 'N/A'}</td>
-                  <td>{beneficiario.afiliadoORM?.nombre ?? 'N/A'}</td>
-                  <td>{beneficiario.afiliadoORM?.email ?? 'N/A'}</td>
+                  <td>{beneficiario.afliliadoORM?.id_afiliado ?? 'N/A'}</td>
+                  <td>{beneficiario.afliliadoORM?.nombre ?? 'N/A'}</td>
+                  <td>{beneficiario.afliliadoORM?.email ?? 'N/A'}</td>
                 </tr>
               ))
             )}
