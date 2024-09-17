@@ -1,17 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import contact from '../assets/images/contact-img.jpg';
 
 const RegistroAfiliado: React.FC = () => {
-  // Estados para los campos del formulario
-  const [id] = useState<string>('');
+  const [id, setId] = useState<number | ''>('');
   const [nombre, setFullName] = useState<string>('');
   const [edad, setAge] = useState<number | ''>('');
   const [email, setEmail] = useState<string>('');
   const [genero, setGender] = useState<string>('');
   const [showId, setShowId] = useState(false);
-  const [message, setMessage] = useState<string | null>(null); // Estado para el mensaje
+  const [message, setMessage] = useState<string | null>(null);
+
+  interface Afiliado {
+    id_afiliado: number;
+    nombre: string;
+    edad: number;
+    email: string;
+    genero: string;
+  }
 
   const CORSHEADER = {
     "Access-Control-Allow-Origin": "*",
@@ -19,25 +26,53 @@ const RegistroAfiliado: React.FC = () => {
     "Access-Control-Allow-Headers": "Content-Type",
   };
 
-  const handleUpdateClick = () => {
-    setShowId(prevShowId => !prevShowId);
+  // Evento para manejar la búsqueda del afiliado por ID y llenar los campos
+  const handleGetClick = () => {
+    if (id) {
+      fetch(`/api/afiliado/${id}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Error en la respuesta HTTP: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data: Afiliado) => {
+          console.log('Afiliado encontrado:', data);
+          // Llenar los campos con los datos del afiliado
+          setFullName(data.nombre);
+          setAge(data.edad);
+          setEmail(data.email);
+          setGender(data.genero);
+          setMessage('Afiliado encontrado y cargado correctamente');
+        })
+        .catch((error) => {
+          console.error('Error al cargar los datos:', error);
+          setMessage('Error al buscar el afiliado.');
+        });
+    } else {
+      setMessage('Por favor ingresa un ID válido.');
+    }
   };
 
+  // Evento para alternar entre registrar y actualizar
+  const handleUpdateClick = () => {
+    setShowId(prevShowId => !prevShowId);
+    setMessage(null); // Limpiar cualquier mensaje previo
+  };
+
+  // Manejo del registro de afiliado (POST)
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-  
-    console.log({ nombre, edad, email, genero }); // Para verificar los valores
   
     fetch('/api/afiliado', {
       method: 'POST',
       headers: {
-        ...CORSHEADER,  // Incluye los encabezados de CORS
-        'Content-Type': 'application/json',  // Agrega el encabezado Content-Type para JSON
+        ...CORSHEADER,
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ nombre, edad, email, genero }),  // Asegúrate de enviar los datos como JSON
+      body: JSON.stringify({ nombre, edad, email, genero }), 
     })
-    .then(data => {
-      // Mostrar mensaje de éxito si la solicitud es exitosa
+    .then(() => {
       setMessage('Afiliado registrado con éxito!');
       setFullName('');
       setAge('');
@@ -45,8 +80,31 @@ const RegistroAfiliado: React.FC = () => {
       setGender('');
     })
     .catch(error => {
-      // Mostrar mensaje de error si algo sale mal
       setMessage(`Error al registrar el afiliado: ${error.message}`);
+    });
+  };
+
+  // Manejo de actualización de afiliado (PUT)
+  const handleUpdate = (event: React.FormEvent) => {
+    event.preventDefault();
+  
+    fetch(`/api/afiliado/${id}`, {  // Usa el ID para la actualización
+      method: 'PUT',
+      headers: {
+        ...CORSHEADER,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ nombre, edad, email, genero }), 
+    })
+    .then(() => {
+      setMessage('Afiliado actualizado con éxito!');
+      setFullName('');
+      setAge('');
+      setEmail('');
+      setGender('');
+    })
+    .catch(error => {
+      setMessage(`Error al actualizar el afiliado: ${error.message}`);
     });
   };
   
@@ -55,16 +113,17 @@ const RegistroAfiliado: React.FC = () => {
       <div className="row">
         <div className="col-md-8">
           <h2>{showId ? 'Actualizar Afiliado' : 'Registrar Afiliado'}</h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={showId ? handleUpdate : handleSubmit}>
             {showId && (
               <div className="mb-3">
                 <label htmlFor="id" className="form-label">ID</label>
                 <input 
-                  type="text" 
+                  type="number" 
                   id="id" 
                   className="form-control" 
                   placeholder="ID" 
                   value={id}
+                  onChange={(e) => setId(Number(e.target.value))}
                 />
               </div>
             )}
@@ -112,6 +171,17 @@ const RegistroAfiliado: React.FC = () => {
                 onChange={(e) => setGender(e.target.value)}
               />
             </div>
+            {showId && (
+              <div className="mb-3">
+                <button 
+                  type="button" 
+                  className="btn btn-primary" 
+                  onClick={handleGetClick}
+                >
+                  Buscar afiliado por ID
+                </button>
+              </div>
+            )}
             <div className="mb-3">
               <button 
                 type="button" 
@@ -123,8 +193,7 @@ const RegistroAfiliado: React.FC = () => {
             </div>
             <button 
               type="submit" 
-              className="btn btn-primary"
-            >
+              className="btn btn-primary">
               {showId ? 'Actualizar' : 'Registrar'}
             </button>
             {message && <div className="mt-3 alert alert-info">{message}</div>}
