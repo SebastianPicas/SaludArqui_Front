@@ -27,7 +27,7 @@ const Citas: React.FC = () => {
       return;
     }
 
-    fetch(`/api/historialMedico/afiliado/${id}`)
+    fetch(`https://saludarqui.uc.r.appspot.com/historialMedico/afiliado/${id}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
