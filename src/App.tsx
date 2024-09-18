@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import Citas from './pages/Citas';
 import AfiliadosTablas from './pages/AfiliadosTable';
 import BeneficiariosTablas from './pages/BeneficiariosTable';
+import RegistroCitas from './pages/RegistroCitas';
 
 function App() {
   return (
@@ -18,11 +19,12 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/SaludArqui_Front/" element={<Home />} />
-          <Route path="/SaludArqui_Front//afiliados" element={<RegistroAfiliados />} />
-          <Route path="/SaludArqui_Front//beneficiarios" element={<RegistroBeneficiarios />} />
-          <Route path="/SaludArqui_Front//citas" element={<Citas />}/>
-          <Route path="/SaludArqui_Front//listafiliados" element={<AfiliadosTablas />}/>
-          <Route path="/SaludArqui_Front//listbeneficiario" element={<BeneficiariosTablas />}/>
+          <Route path="/SaludArqui_Front/afiliados" element={<RegistroAfiliados />} />
+          <Route path="/SaludArqui_Front/beneficiarios" element={<RegistroBeneficiarios />} />
+          <Route path="/SaludArqui_Front/citas" element={<Citas />}/>
+          <Route path="/SaludArqui_Front/listafiliados" element={<AfiliadosTablas />}/>
+          <Route path="/SaludArqui_Front/listbeneficiario" element={<BeneficiariosTablas />}/>
+          <Route path="/SaludArqui_Front/RegistroCitas" element={<RegistroCitas/>}/>
         </Routes>
       </Router>
     </>
