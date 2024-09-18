@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 interface Beneficiario {
-  id_beneficiario: number;
+  idBeneficiario: number;
   nombre: string;
   email: string;
   afliliadoORM: {
@@ -61,8 +61,8 @@ const BeneficiariosTable: React.FC = () => {
               </tr>
             ) : (
               beneficiarios.map((beneficiario) => (
-                <tr key={beneficiario.id_beneficiario}>
-                  <td>{beneficiario.id_beneficiario}</td>
+                <tr key={beneficiario.idBeneficiario}>
+                  <td>{beneficiario.idBeneficiario}</td>
                   <td>{beneficiario.nombre}</td>
                   <td>{beneficiario.email}</td>
                   <td>{beneficiario.afliliadoORM?.idAfiliado ?? 'N/A'}</td>

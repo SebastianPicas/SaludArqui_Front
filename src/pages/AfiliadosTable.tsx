@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 
 interface Afiliado {
-  id_afiliado: number;
+  idAfiliado: number;
   nombre: string;
   edad: number;
   email: string;
@@ -49,8 +49,8 @@ const AfiliadosTable = () => {
             </tr>
           ) : (
             afiliados.map((afiliado) => (
-              <tr key={afiliado.id_afiliado}>
-                <td>{afiliado.id_afiliado}</td>
+              <tr key={afiliado.idAfiliado}>
+                <td>{afiliado.idAfiliado}</td>
                 <td>{afiliado.nombre}</td>
                 <td>{afiliado.edad}</td>
                 <td>{afiliado.email}</td>
