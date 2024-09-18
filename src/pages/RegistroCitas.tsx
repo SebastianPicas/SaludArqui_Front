@@ -4,8 +4,8 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import contact from '../assets/images/contact-img.jpg';
 
 const RegistroCitas: React.FC = () => {
-  const [tipoDeCita, setTipoDeCita] = useState<string>('urgencia');
-  const [descripcion, setDescripcion] = useState<string>('Dolor estomago');
+  const [tipoDeCita, setTipoDeCita] = useState<string>('');
+  const [descripcion, setDescripcion] = useState<string>('');
   const [fechaConsulta, setFechaConsulta] = useState<string>('');
   const [idAfiliado, setIdAfiliado] = useState<number | ''>('');
   const [idBeneficiario, setIdBeneficiario] = useState<number | null>(null);
@@ -14,7 +14,7 @@ const RegistroCitas: React.FC = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    fetch('/api/citaMedica', {
+    fetch('https://saludarqui.uc.r.appspot.com/citaMedica', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ const RegistroCitas: React.FC = () => {
     })
     .then(() => {
       setMessage('Cita registrada con éxito!');
-      setTipoDeCita('urgencia');
+      setTipoDeCita('');
       setDescripcion('');
       setFechaConsulta('');
       setIdAfiliado('');
@@ -40,6 +40,19 @@ const RegistroCitas: React.FC = () => {
         <div className="col-md-8">
           <h2>Registrar Cita</h2>
           <form onSubmit={handleSubmit}>
+            
+          <div className="mb-3">
+              <label htmlFor="idAfiliado" className="form-label">ID Afiliado</label>
+              <input
+                type="number"
+                id="idAfiliado"
+                className="form-control"
+                placeholder="ID Afiliado"
+                value={idAfiliado}
+                onChange={(e) => setIdAfiliado(Number(e.target.value))}
+              />
+            </div>
+
             <div className="mb-3">
               <label htmlFor="tipoDeCita" className="form-label">Tipo de Cita</label>
               <input
@@ -74,31 +87,6 @@ const RegistroCitas: React.FC = () => {
                 onChange={(e) => setFechaConsulta(e.target.value)}
               />
             </div>
-
-            <div className="mb-3">
-              <label htmlFor="idAfiliado" className="form-label">ID Afiliado</label>
-              <input
-                type="number"
-                id="idAfiliado"
-                className="form-control"
-                placeholder="ID Afiliado"
-                value={idAfiliado}
-                onChange={(e) => setIdAfiliado(Number(e.target.value))}
-              />
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="idBeneficiario" className="form-label">ID Beneficiario (Opcional)</label>
-              <input
-                type="number"
-                id="idBeneficiario"
-                className="form-control"
-                placeholder="ID Beneficiario (Opcional)"
-                value={idBeneficiario || ''}
-                onChange={(e) => setIdBeneficiario(e.target.value ? Number(e.target.value) : null)}
-              />
-            </div>
-
             <button type="submit" className="btn btn-primary">
               Registrar Cita
             </button>
