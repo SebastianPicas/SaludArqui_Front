@@ -18,11 +18,11 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/SaludArqui_Front/" element={<Home />} />
-          <Route path="/afiliados" element={<RegistroAfiliados />} />
-          <Route path="/beneficiarios" element={<RegistroBeneficiarios />} />
-          <Route path="/citas" element={<Citas />}/>
-          <Route path="/listafiliados" element={<AfiliadosTablas />}/>
-          <Route path="/listbeneficiario" element={<BeneficiariosTablas />}/>
+          <Route path="/SaludArqui_Front//afiliados" element={<RegistroAfiliados />} />
+          <Route path="/SaludArqui_Front//beneficiarios" element={<RegistroBeneficiarios />} />
+          <Route path="/SaludArqui_Front//citas" element={<Citas />}/>
+          <Route path="/SaludArqui_Front//listafiliados" element={<AfiliadosTablas />}/>
+          <Route path="/SaludArqui_Front//listbeneficiario" element={<BeneficiariosTablas />}/>
         </Routes>
       </Router>
     </>
