@@ -2,24 +2,31 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-interface CitasA {
+interface AfiliadoORM {
+  idAfiliado: number;
+  nombre: string;
+  edad: number;
+  email: string;
+  genero: string;
+}
+
+interface CitaMedica {
   idCita: number;
   tipoDeCita: string;
   fechaConsulta: Date;
   descripcion: string;
-  afliliadoORM: {
-    idAfiliado: number;
-    nombre: string;
-    edad: number;
-    email: string;
-    genero: string;
-  };
+}
+
+interface HistorialMedico {
+  idHistorialMedico: number;
+  citasMedicas: CitaMedica[];
+  afiliadoORM: AfiliadoORM;
 }
 
 const Citas: React.FC = () => {
   const [id, setId] = useState<number | ''>('');
   const [error, setError] = useState<string | null>(null);
-  const [citasA, setCitasA] = useState<CitasA[]>([]);
+  const [citasMedicas, setCitasMedicas] = useState<CitaMedica[]>([]);
 
   const handleGetClick = () => {
     if (id === '') {
@@ -34,9 +41,9 @@ const Citas: React.FC = () => {
         }
         return response.json();
       })
-      .then((data: CitasA[]) => {
+      .then((data: HistorialMedico) => {
         console.log('Datos recibidos:', data);
-        setCitasA(data);
+        setCitasMedicas(data.citasMedicas);
         setError(null);
       })
       .catch((error) => {
@@ -50,7 +57,7 @@ const Citas: React.FC = () => {
       <h2>Historial de Citas</h2>
       <div className="row mb-3">
         <div className="col-md-6">
-          <label htmlFor="id" className="form-label">ID</label>
+          <label htmlFor="id" className="form-label">ID de afiliado a buscar</label>
           <input
             type="text"
             id="id"
@@ -83,22 +90,20 @@ const Citas: React.FC = () => {
                 <thead className="table-dark">
                   <tr>
                     <th>Id Cita</th>
-                    <th>Id Afiliado</th>
                     <th>Tipo De Cita</th>
                     <th>Fecha Consulta</th>
                     <th>Descripcion</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {Array.isArray(citasA) && citasA.length === 0 ? (
+                  {Array.isArray(citasMedicas) && citasMedicas.length === 0 ? (
                     <tr>
-                      <td colSpan={5} className="text-center">Cargando datos...</td>
+                      <td colSpan={4} className="text-center">No se encontraron citas médicas</td>
                     </tr>
                   ) : (
-                    Array.isArray(citasA) && citasA.map((cita) => (
+                    Array.isArray(citasMedicas) && citasMedicas.map((cita) => (
                       <tr key={cita.idCita}>
                         <td>{cita.idCita}</td>
-                        <td>{cita.afliliadoORM.idAfiliado}</td>
                         <td>{cita.tipoDeCita}</td>
                         <td>{new Date(cita.fechaConsulta).toLocaleDateString()}</td>
                         <td>{cita.descripcion}</td>
