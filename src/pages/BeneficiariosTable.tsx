@@ -5,7 +5,7 @@ interface Beneficiario {
   nombre: string;
   email: string;
   afliliadoORM: {
-    id_afiliado: number;
+    idAfiliado: number;
     nombre: string;
     edad: number;
     email: string;
@@ -65,7 +65,7 @@ const BeneficiariosTable: React.FC = () => {
                   <td>{beneficiario.id_beneficiario}</td>
                   <td>{beneficiario.nombre}</td>
                   <td>{beneficiario.email}</td>
-                  <td>{beneficiario.afliliadoORM?.id_afiliado ?? 'N/A'}</td>
+                  <td>{beneficiario.afliliadoORM?.idAfiliado ?? 'N/A'}</td>
                   <td>{beneficiario.afliliadoORM?.nombre ?? 'N/A'}</td>
                   <td>{beneficiario.afliliadoORM?.email ?? 'N/A'}</td>
                 </tr>
