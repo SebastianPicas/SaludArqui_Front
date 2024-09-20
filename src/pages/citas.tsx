@@ -74,7 +74,7 @@ const Citas: React.FC = () => {
             className="btn btn-primary btn-sm"
             onClick={handleGetClick}
           >
-            Search
+            Buscar
           </button>
         </div>
       </div>
