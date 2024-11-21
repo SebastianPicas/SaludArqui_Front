@@ -13,18 +13,6 @@ pipeline {
                 echo 'Checkout step completed'
             }
         }
-        stage('Install Dependencies') {
-            steps {
-                sh 'npm install'
-                echo 'Dependencies installed'
-            }
-        }
-        stage('Build') {
-            steps {
-                sh 'npx tsc && npm run build'
-                echo 'Build step completed'
-            }
-        }
         stage('Docker Build') {
             steps {
                 sh 'sudo docker build -t saludArqui/front . --progress=plain || echo "Docker build failed"'
