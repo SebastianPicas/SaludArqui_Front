@@ -18,7 +18,7 @@ const BeneficiariosTable: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('https://saludarqui.uc.r.appspot.com/beneficiario/todos')
+    fetch('https://api-saludarqui-170213186572.us-central1.run.app/beneficiario/todos')
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

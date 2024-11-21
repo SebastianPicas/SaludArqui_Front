@@ -14,7 +14,7 @@ const RegistroCitas: React.FC = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    fetch('https://saludarqui.uc.r.appspot.com/citaMedica', {
+    fetch('https://api-saludarqui-170213186572.us-central1.run.app/citaMedica', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

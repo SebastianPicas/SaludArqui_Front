@@ -7,7 +7,7 @@ import Navbar from './components/Navbar';
 import RegistroAfiliados from './pages/RegistroAfiliados';
 import RegistroBeneficiarios from './pages/RegistroBeneficiarios';
 import Home from './pages/Home';
-import Citas from './pages/Citas';
+import Citas from './pages/citas';
 import AfiliadosTablas from './pages/AfiliadosTable';
 import BeneficiariosTablas from './pages/BeneficiariosTable';
 import RegistroCitas from './pages/RegistroCitas';

@@ -28,7 +28,7 @@ const RegistroAfiliado: React.FC = () => {
 
   const handleGetClick = () => {
     if (id) {
-      fetch(`https://saludarqui.uc.r.appspot.com/afiliado/${id}`)
+      fetch(`https://api-saludarqui-170213186572.us-central1.run.app/afiliado/${id}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error(`Error en la respuesta HTTP: ${response.status}`);
@@ -60,7 +60,7 @@ const RegistroAfiliado: React.FC = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
   
-    fetch('https://saludarqui.uc.r.appspot.com/afiliado', {
+    fetch('https://api-saludarqui-170213186572.us-central1.run.app/afiliado', {
       method: 'POST',
       headers: {
         ...CORSHEADER,
@@ -84,7 +84,7 @@ const RegistroAfiliado: React.FC = () => {
   const handleUpdate = (event: React.FormEvent) => {
     event.preventDefault();
   
-    fetch(`https://saludarqui.uc.r.appspot.com/afiliado/${id}`, {
+    fetch(`https://api-saludarqui-170213186572.us-central1.run.app/afiliado/${id}`, {
       method: 'PUT',
       headers: {
         ...CORSHEADER,

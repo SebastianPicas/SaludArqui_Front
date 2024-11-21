@@ -34,7 +34,7 @@ const Citas: React.FC = () => {
       return;
     }
 
-    fetch(`https://saludarqui.uc.r.appspot.com/historialMedico/afiliado/${id}`)
+    fetch(`https://api-saludarqui-170213186572.us-central1.run.app/historialMedico/afiliado/${id}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
