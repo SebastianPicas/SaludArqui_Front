@@ -3,7 +3,7 @@ name: React app github deploy
 on:
   push:
     branches:
-
+      - cristjenkins
 
 jobs:
   build:
