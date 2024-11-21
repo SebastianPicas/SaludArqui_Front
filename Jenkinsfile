@@ -47,11 +47,10 @@ pipeline {
             }
         }
 
-        stage('Trivy Scan') {
+         stage('Scan Docker Image with Trivy') {
             steps {
                 script {
-                    // Escanea la imagen con Trivy
-                    sh 'docker run --rm -v "/var/jenkins_home/workspace/CI Frontend:/root/.cache/" aquasec/trivy:latest -q image --light ${DOCKER_IMAGE}:latest'
+                    sh 'trivy image --exit-code 1 --severity CRITICAL --scanners vuln sergioss21/salud_front'
                 }
             }
         }
