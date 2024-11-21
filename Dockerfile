@@ -1,6 +1,9 @@
-FROM jenkins/jenkins:lts
-USER root
-RUN apt-get update
-RUN curl -sSL https://get.docker.com/ | sh
+FROM node:latest
+
+WORKDIR /app
+
+COPY package.json /app
+
+RUN npm install
 
 
