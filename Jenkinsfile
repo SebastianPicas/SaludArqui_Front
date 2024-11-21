@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Docker Build') {
             steps {
-                sh 'docker build -t saludArqui/front .'
+                sh 'sudo docker build -t saludArqui/front .'
             }
         }
     }
