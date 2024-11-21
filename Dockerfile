@@ -1,20 +1,4 @@
-
-FROM node:18-alpine
-
-
-WORKDIR /app
-
-
-COPY package*.json ./
-
-
-RUN npm install
-
-COPY . .
-
-
-RUN npm run build
-
-EXPOSE 3000
-
-CMD ["npx", "serve", "dist"]
+FROM jenkins/jenkins:lts
+USER root
+RUN apt-get update
+RUN curl -sSL https://get.docker.com/ | sh
