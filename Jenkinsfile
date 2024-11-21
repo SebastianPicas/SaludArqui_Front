@@ -5,6 +5,10 @@ pipeline {
         DOCKER_IMAGE = 'salud_front'
     }
 
+     tools {
+        nodejs 'Node'  // Asegúrate de que 'Node 16' es el nombre que configuraste en Jenkins
+    }
+    
     stages {
         stage('Checkout') {
             steps {
