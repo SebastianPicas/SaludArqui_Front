@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        nodejs "node_default"
+        nodejs "node"
     }
 
     environment {
