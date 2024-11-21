@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        nodejs "node"  // Configura Node.js
-        dockerTool "docker"  // Configura Docker (usa dockerTool)
-    }
-
     environment {
         DOCKER_IMAGE = 'salud_front'
     }
