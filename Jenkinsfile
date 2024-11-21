@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'npm run build'
+                sh 'npx tsc && npm run build'
             }
         }
         stage('Docker Build') {
