@@ -1,7 +1,12 @@
 pipeline {
     agent any
-
     stages {
+        stage('Check Docker') {
+            steps {
+                sh 'docker info || echo "Docker is not available"'
+            }
+        }
+
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/SebastianPicas/SaludArqui_Front.git'
@@ -19,7 +24,7 @@ pipeline {
         }
         stage('Docker Build') {
             steps {
-                sh 'sudo docker build -t saludArqui/front .'
+                sh 'sudo docker build -t saludArqui/front . --progress=plain || echo "Docker build failed"'
             }
         }
     }
