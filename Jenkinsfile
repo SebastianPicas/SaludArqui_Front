@@ -17,7 +17,7 @@ pipeline {
                 script {
                     // Aquí no es necesario el bloque nodejs, solo usa npm para instalar dependencias y construir
                     sh 'npm install'
-                    sh 'npm install -g typescript'
+                    sh 'npm install typescript'
                     sh 'npm run build'
                     
                 }
