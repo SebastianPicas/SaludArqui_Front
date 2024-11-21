@@ -50,7 +50,8 @@ pipeline {
          stage('Scan Docker Image with Trivy') {
             steps {
                 script {
-                    sh 'trivy image --exit-code 1 --severity CRITICAL --scanners vuln sergioss21/salud_front'
+                    // Usa una base de datos en caché si está disponible
+                    sh 'trivy image --exit-code 1 --severity CRITICAL --scanners vuln --cache-dir /path/to/cache sergioss21/salud_front'
                 }
             }
         }
