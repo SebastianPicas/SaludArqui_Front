@@ -6,20 +6,9 @@ pipeline {
     }
 
     stages {
-        stage('Initialize') {
-            steps {
-                script {
-                    // Definimos la ubicación del Docker en el PATH
-                    def dockerHome = tool 'docker'  // Usa la configuración de Docker en Jenkins
-                    env.PATH = "${dockerHome}/bin:${env.PATH}"
-                }
-            }
-        }
-
         stage('Checkout') {
             steps {
-                // Asegúrate de que Jenkins esté descargando el repositorio correctamente
-                checkout scm
+                    git branch: 'main', url: 'https://github.com/SebastianPicas/SaludArqui_Front.git'
             }
         }
 
