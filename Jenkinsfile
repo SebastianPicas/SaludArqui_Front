@@ -1,12 +1,9 @@
 pipeline {
     agent any
 
-    environment {
-        DOCKER_IMAGE = 'salud_front'
-    }
 
      tools {
-        nodejs 'Node'  // Asegúrate de que 'Node 16' es el nombre que configuraste en Jenkins
+        nodejs 'Node'  
     }
     
     stages {
@@ -32,7 +29,7 @@ pipeline {
             steps {
                 script {
                     // Construye la imagen Docker
-                    sh 'docker build -t ${DOCKER_IMAGE}:latest .'
+                    sh 'docker build -t sergioss21/salud_front .'
                 }
             }
         }
