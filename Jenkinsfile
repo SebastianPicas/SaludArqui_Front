@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         nodejs "node"  // Configura Node.js
-        docker "docker"  // Configura Docker
+        dockerTool "docker"  // Configura Docker (usa dockerTool)
     }
 
     environment {
